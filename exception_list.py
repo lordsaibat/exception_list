@@ -14,7 +14,7 @@ parser = optparse.OptionParser(usage='python %prog -s SCOPE -e EXCEPTION',
                                )
 parser.add_option('-s','--scope',action="store", help="List of IPs in scope. REQUIRED", type="string", dest="scopefile")
 
-parser.add_option('-e', '--except',action="store", help="list of IPs already scanned or out of scope.. REQUIRED", type="string", dest="exceptlist")
+parser.add_option('-e', '--except',action="store", help="list of IPs already scanned or out of scope. REQUIRED", type="string", dest="exceptlist")
 parser.add_option('-v', '--verbose',action="store", help="Turn on verbose output. Must be set to on.", dest="ver")
 
 parser.add_option('-o', '--out',action="store", help="Output File. Default results will be written to newlist.txt.", type="string", dest="outfile", default="newlist.txt")
@@ -26,6 +26,16 @@ scopevar = options.scopefile
 exceptvar = options.exceptlist
 vervar = options.ver
 outputvar = options.outfile
+
+if (scopevar is None):
+ print "-s mandatory option is missing\n"
+ parser.print_help()
+ exit(-1)
+
+if (exceptvar is None):
+ print "-e mandatory option is missing\n"
+ parser.print_help()
+ exit(-1)
 
 def List (file_name):
  if (vervar == 'on'):
